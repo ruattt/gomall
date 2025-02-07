@@ -1,0 +1,12 @@
+{
+    "editor.hover.enabled": true,
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.gotoLocation.useLocationDefinition": true,  // 启用跳转到定义
+    "editor.gotoLocation.useLocationImplementation": true, // 启用跳转到实现
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": false
+    }
+  }
+  

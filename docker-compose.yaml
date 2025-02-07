@@ -1,0 +1,18 @@
+services:
+  consul:
+    image: "consul:1.15.4"
+    container_name: mall_consul
+
+    ports:
+      - "8500:8500"
+
+
+  mysql:
+    image: "mysql:9"
+    container_name: mall_mysql
+
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=demo_proto
