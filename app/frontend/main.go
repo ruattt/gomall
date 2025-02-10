@@ -4,10 +4,13 @@ package main
 
 import (
 	"context"
+	"os"
 	"time"
 
-	"app/frontend/biz/router"
-	"app/frontend/conf"
+	"gomall_study/app/frontend/biz/router"
+	"gomall_study/app/frontend/conf"
+	"gomall_study/app/frontend/middleware"
+
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/middlewares/server/recovery"
 	"github.com/cloudwego/hertz/pkg/app/server"
@@ -19,6 +22,9 @@ import (
 	"github.com/hertz-contrib/logger/accesslog"
 	hertzlogrus "github.com/hertz-contrib/logger/logrus"
 	"github.com/hertz-contrib/pprof"
+	"github.com/hertz-contrib/sessions"
+	"github.com/hertz-contrib/sessions/redis"
+	"github.com/joho/godotenv"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
@@ -26,6 +32,8 @@ import (
 func main() {
 	// init dal
 	// dal.Init()
+	_ = godotenv.Load()
+
 	address := conf.GetConf().Hertz.Address
 	h := server.New(server.WithHostPorts(address))
 
@@ -37,12 +45,33 @@ func main() {
 	})
 
 	router.GeneratedRegister(h)
+
+	// 加载页面
 	h.LoadHTMLGlob("template/*")
 	h.Static("/static", "./")
+
+	h.GET("/about", func(c context.Context, ctx *app.RequestContext) {
+		ctx.HTML(consts.StatusOK, "about", utils.H{"title": "About"})
+	})
+
+	h.GET("/sign-in", func(c context.Context, ctx *app.RequestContext) {
+		data := utils.H{
+			"title": "Sign In",
+			"next":  ctx.Query("next"),
+		}
+		ctx.HTML(consts.StatusOK, "sign-in", data)
+	})
+	h.GET("/sign-up", func(c context.Context, ctx *app.RequestContext) {
+		ctx.HTML(consts.StatusOK, "sign-up", utils.H{"title": "Sign Up"})
+	})
+
 	h.Spin()
 }
 
 func registerMiddleware(h *server.Hertz) {
+	store, _ := redis.NewStore(10, "tcp", conf.GetConf().Redis.Address, "", []byte(os.Getenv("SESSION_SECRET")))
+	h.Use(sessions.New("cloudwego-shop", store))
+
 	// log
 	logger := hertzlogrus.NewLogger()
 	hlog.SetLogger(logger)
@@ -81,4 +110,7 @@ func registerMiddleware(h *server.Hertz) {
 
 	// cores
 	h.Use(cors.Default())
+
+	// middleware
+	middleware.Register(h)
 }
