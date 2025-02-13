@@ -23,6 +23,14 @@ func (h *LoginService) Run(req *auth.LoginReq) (redirect string, err error) {
 	// hlog.CtxInfof(h.Context, "req = %+v", req)
 	// hlog.CtxInfof(h.Context, "resp = %+v", resp)
 	//}()
+	resp, err := rpc.UserClient.Login(h.Context, &user.LoginReq{
+		Email:    req.Email,
+		Password: req.Password,
+	})
+	if err != nil {
+		return "", err
+	}
+
 	// todo user SVC API
 	session := sessions.Default(h.RequestContext)
 
