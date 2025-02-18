@@ -29,8 +29,6 @@ func Login(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 	c.Redirect(consts.StatusFound, []byte(redirect))
-
-	// utils.SendSuccessResponse(ctx, c, consts.StatusOK, "done!")
 }
 
 // Register .

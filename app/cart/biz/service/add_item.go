@@ -1,0 +1,44 @@
+package service
+
+import (
+	"context"
+	"gomall_study/app/cart/biz/dal/mysql"
+	"gomall_study/app/cart/biz/model"
+	"gomall_study/app/cart/infra/rpc"
+	cart "gomall_study/rpc_gen/kitex_gen/cart"
+	"gomall_study/rpc_gen/kitex_gen/product"
+
+	"github.com/cloudwego/kitex/pkg/kerrors"
+)
+
+type AddItemService struct {
+	ctx context.Context
+} // NewAddItemService new AddItemService
+func NewAddItemService(ctx context.Context) *AddItemService {
+	return &AddItemService{ctx: ctx}
+}
+
+// Run create note info
+func (s *AddItemService) Run(req *cart.AddItemReq) (resp *cart.AddItemResp, err error) {
+	// Finish your business logic.
+	// 查询商品
+	productResp, err := rpc.ProductClient.GetProduct(s.ctx, &product.GetProductReq{Id: req.Item.ProductId})
+	if err != nil {
+		return nil, err
+	}
+	if productResp == nil || productResp.Product.Id == 0{
+		return nil, kerrors.NewBizStatusError(40004001, "Product Not Found")
+	}
+
+	// 改变商品数量
+	cartItem := &model.Cart{
+		UserId:    req.UserId,
+		ProductId: req.Item.ProductId,
+		Qty:       req.Item.Quantity,
+	}
+	err = model.AddItem(s.ctx, mysql.DB, cartItem)
+	if err != nil {
+		return nil, kerrors.NewBizStatusError(3004002, err.Error())
+	}
+
+	return &cart.AddItemResp{}, nil}

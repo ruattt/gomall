@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"gomall_study/app/user/biz/dal/model"
+	"gomall_study/app/user/biz/model"
 	"gomall_study/app/user/conf"
 
 	"gorm.io/driver/mysql"

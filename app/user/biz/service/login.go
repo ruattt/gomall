@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"gomall_study/app/user/biz/dal/model"
 	"gomall_study/app/user/biz/dal/mysql"
+	"gomall_study/app/user/biz/model"
 	user "gomall_study/app/user/kitex_gen/user"
 
 	"golang.org/x/crypto/bcrypt"
@@ -33,6 +33,10 @@ func (s *LoginService) Run(req *user.LoginReq) (resp *user.LoginResp, err error)
 	err = bcrypt.CompareHashAndPassword([]byte(row.PasswordHashed), []byte(req.Password))
 	if err != nil {
 		return nil, err
+	}
+
+	resp = &user.LoginResp{
+		UserId: int32(row.ID),
 	}
 
 	return resp, nil

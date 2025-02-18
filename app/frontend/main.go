@@ -9,6 +9,7 @@ import (
 
 	"gomall_study/app/frontend/biz/router"
 	"gomall_study/app/frontend/conf"
+	rpc "gomall_study/app/frontend/infra/rpc"
 	"gomall_study/app/frontend/middleware"
 
 	"github.com/cloudwego/hertz/pkg/app"
@@ -33,6 +34,8 @@ func main() {
 	// init dal
 	// dal.Init()
 	_ = godotenv.Load()
+
+	rpc.InitClient()
 
 	address := conf.GetConf().Hertz.Address
 	h := server.New(server.WithHostPorts(address))
