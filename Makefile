@@ -5,7 +5,7 @@ gen-demo-proto:
 
 .PHONY: gen-frontend
 gen-frontend:
-	@cd app/frontend && cwgo server -I ../../idl --type HTTP --service frontend --module  ${ROOT_MOD}/app/frontend --idl ../../idl/frontend/checkout_page.proto
+	@cd app/frontend && cwgo server -I ../../idl --type HTTP --service frontend --module  ${ROOT_MOD}/app/frontend --idl ../../idl/frontend/order_page.proto
 
 .PHONY: gen-user
 gen-user:
