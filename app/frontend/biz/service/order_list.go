@@ -71,5 +71,4 @@ func (h *OrderListService) Run(req *common.Empty) (resp map[string]any, err erro
 		"title":  "Order",
 		"orders": list,
 	}, nil
-	return
 }
