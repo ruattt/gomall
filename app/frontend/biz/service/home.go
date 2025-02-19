@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"log"
 
 	common "gomall_study/app/frontend/hertz_gen/frontend/common"
 	"gomall_study/app/frontend/infra/rpc"
@@ -27,7 +26,6 @@ func (h *HomeService) Run(req *common.Empty) (map[string]any, error) {
 	if err != nil {
 		return nil, err
 	}
-	log.Printf("%v",products.Products)
 	return utils.H{
 		"title": "Hot Sale",
 		"items": products.Products,

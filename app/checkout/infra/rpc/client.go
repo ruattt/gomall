@@ -36,9 +36,6 @@ func InitClient() {
 }
 
 
-
-
-
 func initCartClient() {
 	var opts []client.Option
 	r, err := consul.NewConsulResolver(conf.GetConf().Registry.RegistryAddress[0])
