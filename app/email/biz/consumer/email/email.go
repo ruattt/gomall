@@ -8,7 +8,7 @@ import (
 	"github.com/nats-io/nats.go"
 	"google.golang.org/protobuf/proto"
 
-	"gomall/rpc_gen/kitex_gen/email"
+	"gomall_study/rpc_gen/kitex_gen/email"
 )
 
 func ConsumerInit() {
