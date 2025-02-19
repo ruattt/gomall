@@ -4,17 +4,22 @@ import (
 	"net"
 	"time"
 
+	"gomall_study/app/email/biz/consumer"
+	"gomall_study/app/email/conf"
+	"gomall_study/app/email/infra/mq"
+	"gomall_study/rpc_gen/kitex_gen/email/emailservice"
+
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	kitexlogrus "github.com/kitex-contrib/obs-opentelemetry/logging/logrus"
-	"gomall_study/app/email/conf"
-	"gomall_study/rpc_gen/kitex_gen/email/emailservice"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 func main() {
+	mq.Init()
+	consumer.Init()
 	opts := kitexInit()
 
 	svr := emailservice.NewServer(new(EmailServiceImpl), opts...)
