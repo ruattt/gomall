@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"gomall_study/app/checkout/conf"
-	// "gomall_study/app/checkout/infra/mq"
+	"gomall_study/app/checkout/infra/mq"
 	"gomall_study/app/checkout/infra/rpc"
 	"gomall_study/rpc_gen/kitex_gen/checkout/checkoutservice"
 
@@ -21,7 +21,7 @@ import (
 func main() {
 	opts := kitexInit()
 	rpc.InitClient()
-	// mq.Init()
+	mq.Init()
 
 	svr := checkoutservice.NewServer(new(CheckoutServiceImpl), opts...)
 
