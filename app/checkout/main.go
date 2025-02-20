@@ -6,6 +6,7 @@ import (
 
 	"gomall_study/app/checkout/conf"
 	"gomall_study/app/checkout/infra/rpc"
+	"gomall_study/app/checkout/infra/mq"
 	"gomall_study/rpc_gen/kitex_gen/checkout/checkoutservice"
 
 	"github.com/cloudwego/kitex/pkg/klog"
@@ -20,6 +21,7 @@ import (
 func main() {
 	opts := kitexInit()
 	rpc.InitClient()
+	mq.Init()
 
 	svr := checkoutservice.NewServer(new(CheckoutServiceImpl), opts...)
 

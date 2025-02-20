@@ -2,19 +2,19 @@ package service
 
 import (
 	"context"
-	// "gomall_study/app/checkout/infra/mq"
+	"gomall_study/app/checkout/infra/mq"
 	"gomall_study/app/checkout/infra/rpc"
 	"gomall_study/rpc_gen/kitex_gen/cart"
 	checkout "gomall_study/rpc_gen/kitex_gen/checkout"
-	// "gomall_study/rpc_gen/kitex_gen/email"
+	"gomall_study/rpc_gen/kitex_gen/email"
 	"gomall_study/rpc_gen/kitex_gen/order"
 	"gomall_study/rpc_gen/kitex_gen/payment"
 	"gomall_study/rpc_gen/kitex_gen/product"
 
 	"github.com/cloudwego/kitex/pkg/kerrors"
 	"github.com/cloudwego/kitex/pkg/klog"
-	// "github.com/nats-io/nats.go"
-	// "google.golang.org/protobuf/proto"
+	"github.com/nats-io/nats.go"
+	"google.golang.org/protobuf/proto"
 	// "github.com/google/uuid"
 )
 
@@ -113,15 +113,15 @@ func (s *CheckoutService) Run(req *checkout.CheckoutReq) (resp *checkout.Checkou
         return nil, er
     }
 
-	// data, _ := proto.Marshal(&email.EmailReq{
-	// 	From:        "from@example.com",
-	// 	To:          req.Email,
-	// 	ContentType: "text/plain",
-	// 	Subject:     "You just created an order in CloudWeGo shop",
-	// 	Content:     "You just created an order in CloudWeGo shop",
-	// })
-	// msg := &nats.Msg{Subject: "email", Data: data}
-	// _ = mq.Nc.PublishMsg(msg)
+	data, _ := proto.Marshal(&email.EmailReq{
+		From:        "from@example.com",
+		To:          req.Email,
+		ContentType: "text/plain",
+		Subject:     "You just created an order in CloudWeGo shop",
+		Content:     "You just created an order in CloudWeGo shop",
+	})
+	msg := &nats.Msg{Subject: "email", Data: data}
+	_ = mq.Nc.PublishMsg(msg)
 
 	klog.Info(paymentResult)
 
