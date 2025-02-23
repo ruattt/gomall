@@ -8,10 +8,10 @@ import (
 )
 
 type PaymentLog struct {
-	gorm.Model
+	Base
 	UserID        uint32 `json:"user_id"`
 	OrderID       string `json:"order_id"`
-	TransactionID string `gorm:"type:varchar(36);unique_index"`
+	TransactionID string `json:"transaction_id"`
 	Amount        float32 `json:"amount"`
 	PayAt         time.Time  `json:"pay_at"`
 }
