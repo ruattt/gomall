@@ -1,7 +1,7 @@
 services:
   consul:
-    image: "consul:1.15.4"
-    container_name: consul1
+    image: "hashicorp/consul:1.20"
+    container_name: gomall-consul1
 
     ports:
       - "8500:8500"
@@ -10,7 +10,7 @@ services:
   mysql:
     image: "mysql:9"
 
-    container_name: mysql1
+    container_name: gomall-mysql1
     ports:
       - "3306:3306"
     environment:
@@ -21,12 +21,13 @@ services:
 
   redis:
     image: "redis:7"
-    container_name: redis1
+    container_name: gomall-redis1
     ports:
       - "6379:6379"
 
   nats:
-    image: nats:2.10
+    image: "nats:2.10"
+    container_name: gomall-nats1
     ports:
       - "4222:4222"
       - "8222:8222"

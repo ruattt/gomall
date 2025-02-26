@@ -32,13 +32,14 @@ func (h *OrderListService) Run(req *common.Empty) (resp map[string]any, err erro
 	}
 
 	var list []types.Order
-	for _, v := range orderResp.Orders {
+	// o:order
+	for _, o := range orderResp.Orders {
 		var (
 			total float32
 			items []types.OrderItem
 		)
-
-		for _, v := range v.Items {
+		// v:cartitem
+		for _, v := range o.Items {
 			total += v.Cost
 			i := v.Item
 			productResp, err := rpc.ProductClient.GetProduct(h.Context, &product.GetProductReq{Id: i.ProductId})
@@ -57,9 +58,9 @@ func (h *OrderListService) Run(req *common.Empty) (resp map[string]any, err erro
 				Qty:         i.Quantity,
 			})
 		}
-		created := time.Unix(int64(v.CreatedAt), 0)
+		created := time.Unix(int64(o.CreatedAt), 0)
 		list = append(list, types.Order{
-			OrderId:     v.OrderId,
+			OrderId:     o.OrderId,
 			CreatedDate: created.Format("2006-01-02 15:04:05"),
 			Cost:        total,
 			Items:       items,

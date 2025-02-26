@@ -70,6 +70,14 @@ func main() {
 
 func registerMiddleware(h *server.Hertz) {
 	store, _ := redis.NewStore(10, "tcp", conf.GetConf().Redis.Address, "", []byte(os.Getenv("SESSION_SECRET")))
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// store.Options(sessions.Options{MaxAge: 86400, Path: "/"})
+	// rs, err := redis.GetRedisStore(store)
+	// if err == nil {
+	// 	rs.SetSerializer(sessions.JSONSerializer{})
+	// }
 	h.Use(sessions.New("cloudwego-shop", store))
 
 	// log

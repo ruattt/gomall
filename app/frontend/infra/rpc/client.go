@@ -49,6 +49,30 @@ func initProductClient() {
 	r, err := consul.NewConsulResolver(conf.GetConf().Hertz.RegistryAddr)
 	frontendUtils.MustHandleError(err)
 	opts = append(opts, client.WithResolver(r))
+
+	// cbs.UpdateServiceCBConfig("shop-frontend/product/GetProduct", circuitbreak.CBConfig{Enable: true, ErrRate: 0.5, MinSample: 2})
+
+	// opts = append(opts, client.WithCircuitBreaker(cbs), client.WithFallback(fallback.NewFallbackPolicy(fallback.UnwrapHelper(func(ctx context.Context, req, resp interface{}, err error) (fbResp interface{}, fbErr error) {
+	// 	methodName := rpcinfo.GetRPCInfo(ctx).To().Method()
+	// 	if err == nil {
+	// 		return resp, err
+	// 	}
+	// 	if methodName != "ListProducts" {
+	// 		return resp, err
+	// 	}
+	// 	return &product.ListProductsResp{
+	// 		Products: []*product.Product{
+	// 			{
+	// 				Price:       6.6,
+	// 				Id:          3,
+	// 				Picture:     "/static/image/t-shirt.jpeg",
+	// 				Name:        "T-Shirt",
+	// 				Description: "CloudWeGo T-Shirt",
+	// 			},
+	// 		},
+	// 	}, nil
+	// }))))
+
 	ProductClient, err = productcatalogservice.NewClient("product", opts...)
 	frontendUtils.MustHandleError(err)
 }

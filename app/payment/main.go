@@ -6,10 +6,12 @@ import (
 
 	"gomall_study/app/payment/biz/dal"
 	"gomall_study/app/payment/conf"
+	"gomall_study/app/payment/middleware"
 	"gomall_study/rpc_gen/kitex_gen/payment/paymentservice"
 
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
+	"github.com/cloudwego/kitex/pkg/transmeta"
 	"github.com/cloudwego/kitex/server"
 	"github.com/joho/godotenv"
 	kitexlogrus "github.com/kitex-contrib/obs-opentelemetry/logging/logrus"
@@ -43,6 +45,11 @@ func kitexInit() (opts []server.Option) {
 	opts = append(opts, server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{
 		ServiceName: conf.GetConf().Kitex.Service,
 	}))
+
+	opts = append(opts,
+		server.WithMiddleware(middleware.ServerMiddleware),
+		server.WithMetaHandler(transmeta.ServerHTTP2Handler),
+	)
 
 	r, err := consul.NewConsulRegister(conf.GetConf().Registry.RegistryAddress[0])
 	if err != nil {

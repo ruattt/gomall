@@ -41,6 +41,7 @@ func (s *PlaceOrderService) Run(req *order.PlaceOrderReq) (resp *order.PlaceOrde
 			o.Consignee.City = a.City
 			o.Consignee.State = a.State
 			o.Consignee.Country = a.Country
+			o.Consignee.ZipCode = a.ZipCode
 		}
 		if err := tx.Create(o).Error; err != nil {
 			return err
