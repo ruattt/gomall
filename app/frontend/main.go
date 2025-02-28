@@ -32,6 +32,7 @@ import (
 
 func main() {
 	_ = godotenv.Load()
+	
 	rpc.InitClient()
 
 	address := conf.GetConf().Hertz.Address

@@ -2,14 +2,11 @@ services:
   consul:
     image: "hashicorp/consul:1.20"
     container_name: gomall-consul1
-
     ports:
       - "8500:8500"
-    # network_mode: host
 
   mysql:
     image: "mysql:9"
-
     container_name: gomall-mysql1
     ports:
       - "3306:3306"
@@ -31,3 +28,12 @@ services:
     ports:
       - "4222:4222"
       - "8222:8222"
+  prometheus:
+    image: bitnami/prometheus:2.55.1
+    container_name: gomall-prometheus1
+    # volumes:
+    #   - ./deploy/config/prometheus.yml:/etc/prometheus/prometheus.yml
+    # command:
+    #   - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"

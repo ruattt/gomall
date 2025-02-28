@@ -3,7 +3,7 @@ module gomall_study/app/frontend
 go 1.23.6
 
 replace gomall_study/rpc_gen => ../../rpc_gen
-
+replace gomall_study/common => ../../common
 require (
 	github.com/cloudwego/hertz v0.9.5
 	github.com/cloudwego/kitex v0.12.1
