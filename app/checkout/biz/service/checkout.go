@@ -14,6 +14,8 @@ import (
 	"github.com/cloudwego/kitex/pkg/kerrors"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/nats-io/nats.go"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/propagation"
 	"google.golang.org/protobuf/proto"
 	// "github.com/google/uuid"
 )
@@ -66,30 +68,55 @@ func (s *CheckoutService) Run(req *checkout.CheckoutReq) (resp *checkout.Checkou
 			Cost: cost,
 		})
 	}
-	// 实际订单
-	var orderId string
-	orderResp, err := rpc.OrderClient.PlaceOrder(s.ctx, &order.PlaceOrderReq{
-		UserId: req.UserId,
-		Email:  req.Email,
-		Address: &order.Address{
-			StreetAddress: req.Address.StreetAddress,
-			City:          req.Address.City,
-			State:         req.Address.State,
-			Country:       req.Address.Country,
-			ZipCode:       req.Address.ZipCode,
-		},
+
+	// create order
+
+	// &order.PlaceOrderReq{
+	// 	UserId: req.UserId,
+	// 	Email:  req.Email,
+	// 	Address: &order.Address{
+	// 		StreetAddress: req.Address.StreetAddress,
+	// 		City:          req.Address.City,
+	// 		State:         req.Address.State,
+	// 		Country:       req.Address.Country,
+	// 		ZipCode:       req.Address.ZipCode,
+	// 	},
+	// 	Items: oi,
+	// }
+	orderReq := &order.PlaceOrderReq{
+		UserId:       req.UserId,
+		Email:        req.Email,
 		Items: oi,
-	})
+	}
+	if req.Address != nil {
+		addr := req.Address
+		orderReq.Address = &order.Address{
+			StreetAddress: addr.StreetAddress,
+			City:          addr.City,
+			Country:       addr.Country,
+			State:         addr.State,
+			ZipCode:       addr.ZipCode,
+		}
+	}
+	orderResult, err := rpc.OrderClient.PlaceOrder(s.ctx, orderReq)
 	if err != nil {
 		return nil, kerrors.NewGRPCBizStatusError(5004002, err.Error())
 	}
+	klog.Info("orderResult", orderResult)
 
-	if orderResp != nil && orderResp.Order != nil {
-		orderId = orderResp.Order.OrderId
+
+	// empty cart
+	emptyResult, err := rpc.CartClient.EmptyCart(s.ctx, &cart.EmptyCartReq{UserId: req.UserId})
+	if err != nil {
+        klog.Error(err.Error())
+    }
+	klog.Info(emptyResult)
+
+	// charge
+	var orderId string
+	if orderResult != nil && orderResult.Order != nil {
+		orderId = orderResult.Order.OrderId
 	}
-
-	// u, _ := uuid.NewRandom()
-	// orderId = u.String()
 
 	payReq := &payment.ChargeReq{
 		UserId:   req.UserId,
@@ -102,16 +129,11 @@ func (s *CheckoutService) Run(req *checkout.CheckoutReq) (resp *checkout.Checkou
 			CreditCardExpirationYear: req.CreditCard.CreditCardExpirationYear,
         },
 	}
-
-	_, err = rpc.CartClient.EmptyCart(s.ctx, &cart.EmptyCartReq{UserId: req.UserId})
-	if err != nil {
-        klog.Error(err.Error())
-    }
-
 	paymentResult, er := rpc.PaymentClient.Charge(s.ctx, payReq)
 	if er != nil {
         return nil, er
     }
+	klog.Info(paymentResult)
 
 	data, _ := proto.Marshal(&email.EmailReq{
 		From:        "from@example.com",
@@ -120,10 +142,9 @@ func (s *CheckoutService) Run(req *checkout.CheckoutReq) (resp *checkout.Checkou
 		Subject:     "You just created an order in CloudWeGo shop",
 		Content:     "You just created an order in CloudWeGo shop",
 	})
-	msg := &nats.Msg{Subject: "email", Data: data}
+	msg := &nats.Msg{Subject: "email", Data: data, Header: make(nats.Header)}
+	otel.GetTextMapPropagator().Inject(s.ctx, propagation.HeaderCarrier(msg.Header))
 	_ = mq.Nc.PublishMsg(msg)
-
-	klog.Info(paymentResult)
 
 	resp = &checkout.CheckoutResp{
 		OrderId: orderId,

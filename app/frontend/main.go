@@ -11,6 +11,7 @@ import (
 	"gomall_study/app/frontend/conf"
 	rpc "gomall_study/app/frontend/infra/rpc"
 	"gomall_study/app/frontend/middleware"
+	"gomall_study/common/mtl"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/middlewares/server/recovery"
@@ -21,21 +22,45 @@ import (
 	"github.com/hertz-contrib/cors"
 	"github.com/hertz-contrib/gzip"
 	"github.com/hertz-contrib/logger/accesslog"
+	hertzprom "github.com/hertz-contrib/monitor-prometheus"
+	hertzobslogrus "github.com/hertz-contrib/obs-opentelemetry/logging/logrus"
 	hertzlogrus "github.com/hertz-contrib/logger/logrus"
+	hertztracing "github.com/hertz-contrib/obs-opentelemetry/tracing"
 	"github.com/hertz-contrib/pprof"
 	"github.com/hertz-contrib/sessions"
 	"github.com/hertz-contrib/sessions/redis"
 	"github.com/joho/godotenv"
 	"go.uber.org/zap/zapcore"
+	frontendutils "gomall_study/app/frontend/utils"
 	"gopkg.in/natefinch/lumberjack.v2"
+)
+
+var (
+	ServiceName  = frontendutils.ServiceName
+	MetricsPort  = conf.GetConf().Hertz.MetricsPort
+	RegistryAddr = conf.GetConf().Hertz.RegistryAddr
 )
 
 func main() {
 	_ = godotenv.Load()
+	consul, registryInfo := mtl.InitMetric(ServiceName, MetricsPort, RegistryAddr)
+	defer consul.Deregister(registryInfo)
+	p := mtl.InitTracing(ServiceName)
+	defer p.Shutdown(context.Background())
+	
 	rpc.InitClient()
 
 	address := conf.GetConf().Hertz.Address
-	h := server.New(server.WithHostPorts(address))
+	tracer, cfg := hertztracing.NewServerTracer()
+
+	h := server.New(server.WithHostPorts(address),
+		server.WithTracer(hertzprom.NewServerTracer("", "",
+			hertzprom.WithRegistry(mtl.Registry),
+			hertzprom.WithDisableServer(true),
+		)),
+		tracer,
+	)
+	h.Use(hertztracing.ServerMiddleware(cfg))
 
 	registerMiddleware(h)
 
@@ -51,6 +76,7 @@ func main() {
 	h.Static("/static", "./")
 
 	h.GET("/about", func(c context.Context, ctx *app.RequestContext) {
+		hlog.CtxInfof(c, "SHop about page")
 		ctx.HTML(consts.StatusOK, "about", utils.H{"title": "About"})
 	})
 
@@ -70,12 +96,28 @@ func main() {
 
 func registerMiddleware(h *server.Hertz) {
 	store, _ := redis.NewStore(10, "tcp", conf.GetConf().Redis.Address, "", []byte(os.Getenv("SESSION_SECRET")))
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// store.Options(sessions.Options{MaxAge: 86400, Path: "/"})
+	// rs, err := redis.GetRedisStore(store)
+	// if err == nil {
+	// 	rs.SetSerializer(sessions.JSONSerializer{})
+	// }
 	h.Use(sessions.New("cloudwego-shop", store))
 
 	// log
-	logger := hertzlogrus.NewLogger()
+	logger := hertzobslogrus.NewLogger(hertzobslogrus.WithLogger(hertzlogrus.NewLogger().Logger()))
 	hlog.SetLogger(logger)
 	hlog.SetLevel(conf.LogLevel())
+
+	var FlushInterval time.Duration
+	if  os.Getenv("GO_ENV") == "online" {
+		FlushInterval = time.Minute
+	}else{
+		FlushInterval = time.Second
+	}
+
 	asyncWriter := &zapcore.BufferedWriteSyncer{
 		WS: zapcore.AddSync(&lumberjack.Logger{
 			Filename:   conf.GetConf().Hertz.LogFileName,
@@ -83,7 +125,7 @@ func registerMiddleware(h *server.Hertz) {
 			MaxBackups: conf.GetConf().Hertz.LogMaxBackups,
 			MaxAge:     conf.GetConf().Hertz.LogMaxAge,
 		}),
-		FlushInterval: time.Minute,
+		FlushInterval: FlushInterval,
 	}
 	hlog.SetOutput(asyncWriter)
 	h.OnShutdown = append(h.OnShutdown, func(ctx context.Context) {
