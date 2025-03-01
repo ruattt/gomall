@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"net"
 	"time"
 
@@ -25,7 +26,8 @@ var (
 func main() {
 	
 	mtl.InitMetric(ServiceName, conf.GetConf().Kitex.MetricsPort, RegistryAddr)
-	// mtl.InitTracing(serviceName)
+	p := mtl.InitTracing(ServiceName)
+	defer p.Shutdown(context.Background())
 	// mtl.InitLog()
 
 	mq.Init()

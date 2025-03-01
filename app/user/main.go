@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"net"
 	"time"
 
@@ -30,7 +31,8 @@ func main() {
 		klog.Error(err.Error())
 	}
 	mtl.InitMetric(ServiceName, conf.GetConf().Kitex.MetricsPort, RegistryAddr)
-	// mtl.InitTracing(serviceName)
+	p := mtl.InitTracing(ServiceName)
+	defer p.Shutdown(context.Background())
 	// mtl.InitLog()
 	dal.Init()
 
