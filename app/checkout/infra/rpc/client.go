@@ -19,6 +19,8 @@ var (
 	ProductClient productcatalogservice.Client
 	PaymentClient paymentservice.Client
 	OrderClient   orderservice.Client
+	// ServiceName   = "checkout"
+	// RegistryAddr  = "127.0.0.1:8500"
 	ServiceName   = conf.GetConf().Kitex.Service
 	RegistryAddr  = conf.GetConf().Registry.RegistryAddress[0]
 	err           error

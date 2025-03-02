@@ -2,11 +2,16 @@ package service
 
 import (
 	"context"
-	"testing"
+	"gomall_study/app/product/biz/dal/mysql"
 	product "gomall_study/rpc_gen/kitex_gen/product"
+	"testing"
+
+	"github.com/joho/godotenv"
 )
 
 func TestSearchProducts_Run(t *testing.T) {
+	godotenv.Load("../../.env")
+	mysql.Init()
 	ctx := context.Background()
 	s := NewSearchProductsService(ctx)
 	// init req and assert value
