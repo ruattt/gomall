@@ -5,13 +5,13 @@ import (
 	"net"
 	"time"
 
-	"gomall_study/app/payment/biz/dal"
-	"gomall_study/app/payment/conf"
-	"gomall_study/app/payment/middleware"
-	"gomall_study/rpc_gen/kitex_gen/payment/paymentservice"
+	"gomall/app/payment/biz/dal"
+	"gomall/app/payment/conf"
+	"gomall/app/payment/middleware"
+	"gomall/rpc_gen/kitex_gen/payment/paymentservice"
 
-	"gomall_study/common/mtl"
-	"gomall_study/common/serversuite"
+	"gomall/common/mtl"
+	"gomall/common/serversuite"
 
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/server"

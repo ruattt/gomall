@@ -4,12 +4,12 @@ import (
 	"context"
 	"time"
 
-	common "gomall_study/app/frontend/hertz_gen/frontend/common"
-	"gomall_study/app/frontend/infra/rpc"
-	"gomall_study/app/frontend/types"
-	frontendUtils "gomall_study/app/frontend/utils"
-	"gomall_study/rpc_gen/kitex_gen/order"
-	"gomall_study/rpc_gen/kitex_gen/product"
+	common "gomall/app/frontend/hertz_gen/frontend/common"
+	"gomall/app/frontend/infra/rpc"
+	"gomall/app/frontend/types"
+	frontendUtils "gomall/app/frontend/utils"
+	"gomall/rpc_gen/kitex_gen/order"
+	"gomall/rpc_gen/kitex_gen/product"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/common/utils"

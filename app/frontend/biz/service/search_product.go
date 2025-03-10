@@ -3,10 +3,10 @@ package service
 import (
 	"context"
 
-	product "gomall_study/app/frontend/hertz_gen/frontend/product"
-	"gomall_study/app/frontend/infra/rpc"
+	product "gomall/app/frontend/hertz_gen/frontend/product"
+	"gomall/app/frontend/infra/rpc"
 
-	rpcproduct "gomall_study/rpc_gen/kitex_gen/product"
+	rpcproduct "gomall/rpc_gen/kitex_gen/product"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/common/utils"

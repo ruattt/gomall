@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
-	"gomall_study/app/cart/biz/dal/mysql"
-	"gomall_study/app/cart/biz/model"
-	cart "gomall_study/rpc_gen/kitex_gen/cart"
+	"gomall/app/cart/biz/dal/mysql"
+	"gomall/app/cart/biz/model"
+	cart "gomall/rpc_gen/kitex_gen/cart"
 
 	"github.com/cloudwego/kitex/pkg/kerrors"
 )

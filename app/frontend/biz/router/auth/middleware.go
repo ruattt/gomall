@@ -30,3 +30,18 @@ func _registerMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
+
+func _infoMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _userinfoMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _updateinfoMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}

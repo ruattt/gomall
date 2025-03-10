@@ -1,11 +1,11 @@
-module gomall_study/app/checkout
+module gomall/app/checkout
 
 go 1.23.6
 
 replace (
 	github.com/apache/thrift => github.com/apache/thrift v0.13.0
-	gomall_study/common => ../../common
-	gomall_study/rpc_gen => ../../rpc_gen
+	gomall/common => ../../common
+	gomall/rpc_gen => ../../rpc_gen
 )
 
 require (
@@ -16,8 +16,8 @@ require (
 	github.com/redis/go-redis/v9 v9.7.0
 	go.opentelemetry.io/otel v1.34.0
 	go.uber.org/zap v1.27.0
-	gomall_study/common v0.0.0-00010101000000-000000000000
-	gomall_study/rpc_gen v0.0.0-00010101000000-000000000000
+	gomall/common v0.0.0-00010101000000-000000000000
+	gomall/rpc_gen v0.0.0-00010101000000-000000000000
 	google.golang.org/protobuf v1.36.3
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 	gopkg.in/validator.v2 v2.0.1

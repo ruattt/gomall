@@ -1,8 +1,8 @@
 package dal
 
 import (
-	"gomall_study/app/checkout/biz/dal/mysql"
-	"gomall_study/app/checkout/biz/dal/redis"
+	"gomall/app/checkout/biz/dal/mysql"
+	"gomall/app/checkout/biz/dal/redis"
 )
 
 func Init() {

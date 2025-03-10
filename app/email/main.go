@@ -5,13 +5,13 @@ import (
 	"net"
 	"time"
 
-	"gomall_study/app/email/biz/consumer"
-	"gomall_study/app/email/conf"
-	"gomall_study/app/email/infra/mq"
-	"gomall_study/rpc_gen/kitex_gen/email/emailservice"
+	"gomall/app/email/biz/consumer"
+	"gomall/app/email/conf"
+	"gomall/app/email/infra/mq"
+	"gomall/rpc_gen/kitex_gen/email/emailservice"
 
-	"gomall_study/common/mtl"
-	"gomall_study/common/serversuite"
+	"gomall/common/mtl"
+	"gomall/common/serversuite"
 
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/server"

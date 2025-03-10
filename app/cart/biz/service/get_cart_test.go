@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	"gomall_study/app/cart/biz/dal/mysql"
-	cart "gomall_study/rpc_gen/kitex_gen/cart"
+	"gomall/app/cart/biz/dal/mysql"
+	cart "gomall/rpc_gen/kitex_gen/cart"
 	"testing"
 
 	"github.com/joho/godotenv"

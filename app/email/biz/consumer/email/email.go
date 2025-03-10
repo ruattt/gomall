@@ -2,8 +2,8 @@ package email
 
 import (
 	"context"
-	"gomall_study/app/email/infra/mq"
-	"gomall_study/app/email/infra/notify"
+	"gomall/app/email/infra/mq"
+	"gomall/app/email/infra/notify"
 
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/server"
@@ -12,7 +12,7 @@ import (
 	"go.opentelemetry.io/otel/propagation"
 	"google.golang.org/protobuf/proto"
 
-	"gomall_study/rpc_gen/kitex_gen/email"
+	"gomall/rpc_gen/kitex_gen/email"
 )
 
 func ConsumerInit() {

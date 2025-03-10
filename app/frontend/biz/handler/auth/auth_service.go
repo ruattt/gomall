@@ -3,10 +3,10 @@ package auth
 import (
 	"context"
 
-	"gomall_study/app/frontend/biz/service"
-	"gomall_study/app/frontend/biz/utils"
-	auth "gomall_study/app/frontend/hertz_gen/frontend/auth"
-	common "gomall_study/app/frontend/hertz_gen/frontend/common"
+	"gomall/app/frontend/biz/service"
+	"gomall/app/frontend/biz/utils"
+	auth "gomall/app/frontend/hertz_gen/frontend/auth"
+	common "gomall/app/frontend/hertz_gen/frontend/common"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
@@ -61,7 +61,6 @@ func Logout(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
-	// resp := &common.Empty{}
 	_, err = service.NewLogoutService(ctx, c).Run(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
@@ -69,6 +68,46 @@ func Logout(ctx context.Context, c *app.RequestContext) {
 	}
 
 	c.Redirect(consts.StatusFound, []byte("/"))
+}
 
-	// utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
+// Userinfo .
+// @router /auth/userinfo [GET]
+func Userinfo(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req auth.UserInfoReq
+	err = c.BindAndValidate(&req)
+	if err != nil {
+		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+		return
+	}
+
+	resp, err := service.NewUserinfoService(ctx, c).Run(&req)
+
+	if err != nil {
+		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+		return
+	}
+	c.HTML(consts.StatusOK, "userinfo", utils.WarpResponse(ctx, c, resp))
+}
+
+// Updateinfo .
+// @router /auth/updateinfo [POST]
+func Updateinfo(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req auth.UpdateInfoReq
+	err = c.BindAndValidate(&req)
+	if err != nil {
+		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+		return
+	}
+
+	resp, err := service.NewUpdateinfoService(ctx, c).Run(&req)
+
+	if err != nil {
+		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+		return
+	}
+	c.HTML(consts.StatusOK, "userinfo", utils.WarpResponse(ctx, c, resp))
+
+	// c.Redirect(consts.StatusFound, []byte("/"))
 }

@@ -2,14 +2,14 @@ package service
 
 import (
 	"context"
-	"gomall_study/app/checkout/infra/mq"
-	"gomall_study/app/checkout/infra/rpc"
-	"gomall_study/rpc_gen/kitex_gen/cart"
-	checkout "gomall_study/rpc_gen/kitex_gen/checkout"
-	"gomall_study/rpc_gen/kitex_gen/email"
-	"gomall_study/rpc_gen/kitex_gen/order"
-	"gomall_study/rpc_gen/kitex_gen/payment"
-	"gomall_study/rpc_gen/kitex_gen/product"
+	"gomall/app/checkout/infra/mq"
+	"gomall/app/checkout/infra/rpc"
+	"gomall/rpc_gen/kitex_gen/cart"
+	checkout "gomall/rpc_gen/kitex_gen/checkout"
+	"gomall/rpc_gen/kitex_gen/email"
+	"gomall/rpc_gen/kitex_gen/order"
+	"gomall/rpc_gen/kitex_gen/payment"
+	"gomall/rpc_gen/kitex_gen/product"
 
 	"github.com/cloudwego/kitex/pkg/kerrors"
 	"github.com/cloudwego/kitex/pkg/klog"

@@ -4,11 +4,11 @@ import (
 	"context"
 	"strconv"
 
-	common "gomall_study/app/frontend/hertz_gen/frontend/common"
-	"gomall_study/app/frontend/infra/rpc"
-	frontendutils "gomall_study/app/frontend/utils"
-	rpccart "gomall_study/rpc_gen/kitex_gen/cart"
-	rpcproduct "gomall_study/rpc_gen/kitex_gen/product"
+	common "gomall/app/frontend/hertz_gen/frontend/common"
+	"gomall/app/frontend/infra/rpc"
+	frontendutils "gomall/app/frontend/utils"
+	rpccart "gomall/rpc_gen/kitex_gen/cart"
+	rpcproduct "gomall/rpc_gen/kitex_gen/product"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/common/utils"
 )

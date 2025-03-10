@@ -5,12 +5,12 @@ import (
 	"net"
 	"time"
 
-	"gomall_study/app/checkout/conf"
-	"gomall_study/app/checkout/infra/mq"
-	"gomall_study/app/checkout/infra/rpc"
-	"gomall_study/common/mtl"
-	"gomall_study/common/serversuite"
-	"gomall_study/rpc_gen/kitex_gen/checkout/checkoutservice"
+	"gomall/app/checkout/conf"
+	"gomall/app/checkout/infra/mq"
+	"gomall/app/checkout/infra/rpc"
+	"gomall/common/mtl"
+	"gomall/common/serversuite"
+	"gomall/rpc_gen/kitex_gen/checkout/checkoutservice"
 
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/server"

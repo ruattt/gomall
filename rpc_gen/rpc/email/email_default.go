@@ -2,7 +2,7 @@ package email
 
 import (
 	"context"
-	email "gomall_study/rpc_gen/kitex_gen/email"
+	email "gomall/rpc_gen/kitex_gen/email"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/klog"
 )

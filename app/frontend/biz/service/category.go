@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 
-	category "gomall_study/app/frontend/hertz_gen/frontend/category"
-	"gomall_study/app/frontend/infra/rpc"
-	"gomall_study/rpc_gen/kitex_gen/product"
+	category "gomall/app/frontend/hertz_gen/frontend/category"
+	"gomall/app/frontend/infra/rpc"
+	"gomall/rpc_gen/kitex_gen/product"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/common/utils"
 )

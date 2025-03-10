@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	"gomall_study/app/checkout/infra/rpc"
-	checkout "gomall_study/rpc_gen/kitex_gen/checkout"
+	"gomall/app/checkout/infra/rpc"
+	checkout "gomall/rpc_gen/kitex_gen/checkout"
 	"testing"
 
 	"github.com/joho/godotenv"

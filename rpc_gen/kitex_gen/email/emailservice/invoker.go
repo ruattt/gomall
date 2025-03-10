@@ -4,7 +4,7 @@ package emailservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	email "gomall_study/rpc_gen/kitex_gen/email"
+	email "gomall/rpc_gen/kitex_gen/email"
 )
 
 // NewInvoker creates a server.Invoker with the given handler and options.

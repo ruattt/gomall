@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
-	"gomall_study/app/order/biz/dal/mysql"
-	"gomall_study/app/order/biz/model"
-	order "gomall_study/rpc_gen/kitex_gen/order"
+	"gomall/app/order/biz/dal/mysql"
+	"gomall/app/order/biz/model"
+	order "gomall/rpc_gen/kitex_gen/order"
 
 	"github.com/cloudwego/kitex/pkg/kerrors"
 	"github.com/google/uuid"

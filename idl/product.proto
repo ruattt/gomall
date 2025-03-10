@@ -47,3 +47,5 @@ message SearchProductsReq {
 message SearchProductsResp {
     repeated Product results = 1;
 }
+
+

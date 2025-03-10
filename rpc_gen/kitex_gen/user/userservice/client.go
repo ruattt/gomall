@@ -6,13 +6,15 @@ import (
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	user "gomall_study/rpc_gen/kitex_gen/user"
+	user "gomall/rpc_gen/kitex_gen/user"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
 type Client interface {
 	Register(ctx context.Context, Req *user.RegisterReq, callOptions ...callopt.Option) (r *user.RegisterResp, err error)
 	Login(ctx context.Context, Req *user.LoginReq, callOptions ...callopt.Option) (r *user.LoginResp, err error)
+	GetInfo(ctx context.Context, Req *user.GetInfoReq, callOptions ...callopt.Option) (r *user.GetInfoResp, err error)
+	UpdateInfo(ctx context.Context, Req *user.UpdateInfoReq, callOptions ...callopt.Option) (r *user.UpdateInfoResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -52,4 +54,14 @@ func (p *kUserServiceClient) Register(ctx context.Context, Req *user.RegisterReq
 func (p *kUserServiceClient) Login(ctx context.Context, Req *user.LoginReq, callOptions ...callopt.Option) (r *user.LoginResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.Login(ctx, Req)
+}
+
+func (p *kUserServiceClient) GetInfo(ctx context.Context, Req *user.GetInfoReq, callOptions ...callopt.Option) (r *user.GetInfoResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetInfo(ctx, Req)
+}
+
+func (p *kUserServiceClient) UpdateInfo(ctx context.Context, Req *user.UpdateInfoReq, callOptions ...callopt.Option) (r *user.UpdateInfoResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdateInfo(ctx, Req)
 }

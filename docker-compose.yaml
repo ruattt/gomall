@@ -28,47 +28,47 @@ services:
     ports:
       - "4222:4222"
       - "8222:8222"
-  prometheus:
-    image: bitnami/prometheus:2.55.1
-    container_name: gomall-prometheus1
-    volumes:
-      - ./deploy/config/prometheus.yml:/etc/prometheus/prometheus.yml
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-    ports:
-      - "9090:9090"
+  # prometheus:
+  #   image: bitnami/prometheus:2.55.1
+  #   container_name: gomall-prometheus1
+  #   volumes:
+  #     - ./deploy/config/prometheus.yml:/etc/prometheus/prometheus.yml
+  #   command:
+  #     - "--config.file=/etc/prometheus/prometheus.yml"
+  #   ports:
+  #     - "9090:9090"
 
-  grafana:
-    image: grafana/grafana:11.5.2
-    container_name: gomall-grafana1
-    ports:
-      - "3000:3000"
-    environment:
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-      - GF_AUTH_DISABLE_LOGIN_FORM=true
-    # volumes:
-    #   - ./deploy/config/grafana:/etc/grafana/provisioning
+  # grafana:
+  #   image: grafana/grafana:11.5.2
+  #   container_name: gomall-grafana1
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - GF_AUTH_ANONYMOUS_ENABLED=true
+  #     - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+  #     - GF_AUTH_DISABLE_LOGIN_FORM=true
+  #   # volumes:
+  #   #   - ./deploy/config/grafana:/etc/grafana/provisioning
 
-  jaeger-all-in-one:
-    image: jaegertracing/all-in-one:1.66.0
-    container_name: gomall-all-in-one-1
-    ports:
-      - "16686:16686"
-      - "4317:4317"
-      - "4318:4318"
+  # jaeger-all-in-one:
+  #   image: jaegertracing/all-in-one:1.66.0
+  #   container_name: gomall-all-in-one-1
+  #   ports:
+  #     - "16686:16686"
+  #     - "4317:4317"
+  #     - "4318:4318"
 
-  loki:
-    image: grafana/loki:2.9.2
-    volumes:
-      - ./deploy/config/loki.yml:/etc/loki/local-config.yaml
-    command: -config.file=/etc/loki/local-config.yaml
-    ports:
-      - "3100:3100"
+  # loki:
+  #   image: grafana/loki:2.9.2
+  #   volumes:
+  #     - ./deploy/config/loki.yml:/etc/loki/local-config.yaml
+  #   command: -config.file=/etc/loki/local-config.yaml
+  #   ports:
+  #     - "3100:3100"
 
-  promtail:
-    image: grafana/promtail:2.9.2
-    volumes:
-      - ./deploy/config/promtail.yml:/etc/promtail/config.yml
-      - ./app/frontend/log:/logs/frontend
-    command: -config.file=/etc/promtail/config.yml
+  # promtail:
+  #   image: grafana/promtail:2.9.2
+  #   volumes:
+  #     - ./deploy/config/promtail.yml:/etc/promtail/config.yml
+  #     - ./app/frontend/log:/logs/frontend
+  #   command: -config.file=/etc/promtail/config.yml

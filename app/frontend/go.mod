@@ -1,10 +1,10 @@
-module gomall_study/app/frontend
+module gomall/app/frontend
 
 go 1.23.6
 
-replace gomall_study/rpc_gen => ../../rpc_gen
+replace gomall/rpc_gen => ../../rpc_gen
 
-replace gomall_study/common => ../../common
+replace gomall/common => ../../common
 
 require (
 	github.com/cloudwego/hertz v0.9.5
@@ -20,14 +20,17 @@ require (
 	github.com/kr/pretty v0.3.1
 	github.com/redis/go-redis/v9 v9.7.0
 	go.uber.org/zap v1.27.0
-	gomall_study/common v0.0.0-00010101000000-000000000000
-	gomall_study/rpc_gen v0.0.0-00010101000000-000000000000
 	google.golang.org/protobuf v1.36.5
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 	gopkg.in/validator.v2 v2.0.1
 	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.12
+)
+
+require (
+	gomall/common v0.0.0-00010101000000-000000000000
+	gomall/rpc_gen v0.0.0-00010101000000-000000000000
 )
 
 require (
@@ -112,7 +115,7 @@ require (
 	github.com/felixge/fgprof v0.9.3 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
-	github.com/golang/protobuf v1.5.4 // indirect
+	github.com/golang/protobuf v1.5.4
 	github.com/gomodule/redigo v1.9.2 // indirect
 	github.com/google/pprof v0.0.0-20240727154555-813a5fbdbec8 // indirect
 	github.com/gorilla/context v1.1.2 // indirect

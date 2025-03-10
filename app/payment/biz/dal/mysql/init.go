@@ -2,8 +2,8 @@ package mysql
 
 import (
 	"fmt"
-	"gomall_study/app/payment/biz/model"
-	"gomall_study/app/payment/conf"
+	"gomall/app/payment/biz/model"
+	"gomall/app/payment/conf"
 	"os"
 
 	"gorm.io/driver/mysql"

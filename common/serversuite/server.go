@@ -1,7 +1,7 @@
 package serversuite
 
 import (
-	"gomall_study/common/mtl"
+	"gomall/common/mtl"
 
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
@@ -11,6 +11,7 @@ import (
 	// "github.com/hertz-contrib/obs-opentelemetry/provider"
 	prometheus "github.com/kitex-contrib/monitor-prometheus"
 	"github.com/kitex-contrib/obs-opentelemetry/tracing"
+
 	// "github.com/kitex-contrib/obs-opentelemetry/tracing"
 	consul "github.com/kitex-contrib/registry-consul"
 )
@@ -33,7 +34,6 @@ func (s CommonServerSuite) Options() []server.Option {
 	}
 
 	// _ = provider.NewOpenTelemetryProvider(provider.WithSdkTracerProvider(mtl.TracerProvider), provider.WithEnableMetrics(false))
-
 
 	r, err := consul.NewConsulRegister(s.RegistryAddr)
 	if err != nil {

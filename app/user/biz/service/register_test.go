@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"gomall_study/app/user/biz/dal/mysql"
-	user "gomall_study/app/user/kitex_gen/user"
+	"gomall/app/user/biz/dal/mysql"
+	user "gomall/rpc_gen/kitex_gen/user"
 
 	"github.com/joho/godotenv"
 )

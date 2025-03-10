@@ -3,9 +3,9 @@ package home
 import (
 	"context"
 
-	"gomall_study/app/frontend/biz/service"
-	"gomall_study/app/frontend/biz/utils"
-	common "gomall_study/app/frontend/hertz_gen/frontend/common"
+	"gomall/app/frontend/biz/service"
+	"gomall/app/frontend/biz/utils"
+	common "gomall/app/frontend/hertz_gen/frontend/common"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
@@ -28,6 +28,4 @@ func Home(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 	c.HTML(consts.StatusOK, "home", utils.WarpResponse(ctx, c, resp))
-
-	// utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
 }

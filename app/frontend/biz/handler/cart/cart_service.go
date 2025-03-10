@@ -5,10 +5,10 @@ import (
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
-	"gomall_study/app/frontend/biz/service"
-	"gomall_study/app/frontend/biz/utils"
-	cart "gomall_study/app/frontend/hertz_gen/frontend/cart"
-	common "gomall_study/app/frontend/hertz_gen/frontend/common"
+	"gomall/app/frontend/biz/service"
+	"gomall/app/frontend/biz/utils"
+	cart "gomall/app/frontend/hertz_gen/frontend/cart"
+	common "gomall/app/frontend/hertz_gen/frontend/common"
 )
 
 // AddCartItem .

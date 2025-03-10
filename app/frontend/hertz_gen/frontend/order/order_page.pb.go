@@ -7,8 +7,8 @@
 package order
 
 import (
-	_ "gomall_study/app/frontend/hertz_gen/api"
-	common "gomall_study/app/frontend/hertz_gen/frontend/common"
+	_ "gomall/app/frontend/hertz_gen/api"
+	common "gomall/app/frontend/hertz_gen/frontend/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

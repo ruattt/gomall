@@ -2,9 +2,9 @@ package product
 
 import (
 	"context"
-	product "gomall_study/rpc_gen/kitex_gen/product"
+	product "gomall/rpc_gen/kitex_gen/product"
 
-	"gomall_study/rpc_gen/kitex_gen/product/productcatalogservice"
+	"gomall/rpc_gen/kitex_gen/product/productcatalogservice"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/client/callopt"
 )

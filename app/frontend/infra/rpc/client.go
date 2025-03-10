@@ -4,16 +4,16 @@ import (
 	"sync"
 	// "sync"
 
-	"gomall_study/app/frontend/conf"
-	frontendUtils "gomall_study/app/frontend/utils"
-	"gomall_study/rpc_gen/kitex_gen/cart/cartservice"
-	"gomall_study/rpc_gen/kitex_gen/checkout/checkoutservice"
-	"gomall_study/rpc_gen/kitex_gen/order/orderservice"
-	"gomall_study/rpc_gen/kitex_gen/product/productcatalogservice"
-	"gomall_study/rpc_gen/kitex_gen/user/userservice"
+	"gomall/app/frontend/conf"
+	frontendUtils "gomall/app/frontend/utils"
+	"gomall/rpc_gen/kitex_gen/cart/cartservice"
+	"gomall/rpc_gen/kitex_gen/checkout/checkoutservice"
+	"gomall/rpc_gen/kitex_gen/order/orderservice"
+	"gomall/rpc_gen/kitex_gen/product/productcatalogservice"
+	"gomall/rpc_gen/kitex_gen/user/userservice"
 
 	"github.com/cloudwego/kitex/client"
-	"gomall_study/common/clientsuite"
+	"gomall/common/clientsuite"
 )
 
 var (

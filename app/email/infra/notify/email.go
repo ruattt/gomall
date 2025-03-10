@@ -1,7 +1,7 @@
 package notify
 
 import (
-	"gomall_study/rpc_gen/kitex_gen/email"
+	"gomall/rpc_gen/kitex_gen/email"
 	"github.com/kr/pretty"
 )
 

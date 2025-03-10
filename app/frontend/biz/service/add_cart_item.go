@@ -3,11 +3,11 @@ package service
 import (
 	"context"
 
-	cart "gomall_study/app/frontend/hertz_gen/frontend/cart"
-	common "gomall_study/app/frontend/hertz_gen/frontend/common"
-	"gomall_study/app/frontend/infra/rpc"
-	frontendUtils "gomall_study/app/frontend/utils"
-	rpccart "gomall_study/rpc_gen/kitex_gen/cart"
+	cart "gomall/app/frontend/hertz_gen/frontend/cart"
+	common "gomall/app/frontend/hertz_gen/frontend/common"
+	"gomall/app/frontend/infra/rpc"
+	frontendUtils "gomall/app/frontend/utils"
+	rpccart "gomall/rpc_gen/kitex_gen/cart"
 	"github.com/cloudwego/hertz/pkg/app"
 )
 

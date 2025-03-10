@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	cart "gomall_study/rpc_gen/kitex_gen/cart"
-	"gomall_study/app/cart/biz/service"
+	cart "gomall/rpc_gen/kitex_gen/cart"
+	"gomall/app/cart/biz/service"
 )
 
 // CartServiceImpl implements the last service interface defined in the IDL.

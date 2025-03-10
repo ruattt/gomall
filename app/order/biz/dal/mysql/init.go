@@ -2,8 +2,8 @@ package mysql
 
 import (
 	"fmt"
-	"gomall_study/app/order/biz/model"
-	"gomall_study/app/order/conf"
+	"gomall/app/order/biz/model"
+	"gomall/app/order/conf"
 	"os"
 
 	"github.com/cloudwego/kitex/pkg/klog"

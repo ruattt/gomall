@@ -3,14 +3,14 @@ package rpc
 import (
 	"sync"
 
-	"gomall_study/app/checkout/conf"
-	"gomall_study/rpc_gen/kitex_gen/cart/cartservice"
-	"gomall_study/rpc_gen/kitex_gen/payment/paymentservice"
-	"gomall_study/rpc_gen/kitex_gen/product/productcatalogservice"
-	"gomall_study/rpc_gen/kitex_gen/order/orderservice"
+	"gomall/app/checkout/conf"
+	"gomall/rpc_gen/kitex_gen/cart/cartservice"
+	"gomall/rpc_gen/kitex_gen/payment/paymentservice"
+	"gomall/rpc_gen/kitex_gen/product/productcatalogservice"
+	"gomall/rpc_gen/kitex_gen/order/orderservice"
 
 	"github.com/cloudwego/kitex/client"
-	"gomall_study/common/clientsuite"
+	"gomall/common/clientsuite"
 )
 
 var (

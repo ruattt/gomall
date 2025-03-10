@@ -7,6 +7,26 @@ import "frontend/common.proto";
 
 option go_package = "frontend/auth";
 
+
+service AuthService {
+   rpc login(LoginReq) returns(common.Empty) {
+      option (api.post) = "/auth/login";
+   }
+   rpc register(RegisterReq) returns(common.Empty) {
+      option (api.post) = "/auth/register";
+   }
+   rpc logout(common.Empty) returns(common.Empty) {
+      option (api.post) = "/auth/logout";
+   }
+   rpc userinfo(UserInfoReq) returns(common.Empty) {
+      option (api.get) = "/auth/userinfo";
+   }
+
+   rpc updateinfo(UpdateInfoReq) returns(UpdateInfoResp) {
+      option (api.post) = "/auth/updateinfo";
+   }
+}
+
 message LoginReq {
    string email = 1 [(api.form)="email"];
    string password = 2 [(api.form)="password"];
@@ -19,14 +39,17 @@ message RegisterReq {
    string password_confirm = 3 [(api.form)="password_confirm"];
 }
 
-service AuthService {
-  rpc login(LoginReq) returns(common.Empty) {
-     option (api.post) = "/auth/login";
-  }
-  rpc register(RegisterReq) returns(common.Empty) {
-   option (api.post) = "/auth/register";
+message UserInfoReq {
+   string userid = 1 [(api.form)="userid"];
 }
-rpc logout(common.Empty) returns(common.Empty) {
-   option (api.post) = "/auth/logout";
-}
+
+message UpdateInfoReq {
+   string userid = 1 [(api.form)="userid"];
+   string name = 2 [(api.form)="name"];
+   string email = 3 [(api.form)="email"];
+   string password = 4 [(api.form)="password"];
+}  
+
+message UpdateInfoResp {
+   bool success = 1;
 }

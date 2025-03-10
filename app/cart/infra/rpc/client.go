@@ -4,10 +4,10 @@ import (
 	"sync"
 
 	"github.com/cloudwego/kitex/client"
-	"gomall_study/app/cart/conf"
-	cartutils "gomall_study/app/cart/utils"
-	"gomall_study/common/clientsuite"
-	"gomall_study/rpc_gen/kitex_gen/product/productcatalogservice"
+	"gomall/app/cart/conf"
+	cartutils "gomall/app/cart/utils"
+	"gomall/common/clientsuite"
+	"gomall/rpc_gen/kitex_gen/product/productcatalogservice"
 )
 
 var (

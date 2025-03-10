@@ -7,11 +7,11 @@ import (
 	"os"
 	"time"
 
-	"gomall_study/app/frontend/biz/router"
-	"gomall_study/app/frontend/conf"
-	rpc "gomall_study/app/frontend/infra/rpc"
-	"gomall_study/app/frontend/middleware"
-	"gomall_study/common/mtl"
+	"gomall/app/frontend/biz/router"
+	"gomall/app/frontend/conf"
+	rpc "gomall/app/frontend/infra/rpc"
+	"gomall/app/frontend/middleware"
+	"gomall/common/mtl"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/middlewares/server/recovery"
@@ -31,7 +31,7 @@ import (
 	"github.com/hertz-contrib/sessions/redis"
 	"github.com/joho/godotenv"
 	"go.uber.org/zap/zapcore"
-	frontendutils "gomall_study/app/frontend/utils"
+	frontendutils "gomall/app/frontend/utils"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
@@ -95,7 +95,7 @@ func main() {
 }
 
 func registerMiddleware(h *server.Hertz) {
-	store, _ := redis.NewStore(10, "tcp", conf.GetConf().Redis.Address, "", []byte(os.Getenv("SESSION_SECRET")))
+	store, _ := redis.NewStore(100, "tcp", conf.GetConf().Redis.Address, "", []byte(os.Getenv("SESSION_SECRET")))
 	// if err != nil {
 	// 	panic(err)
 	// }
@@ -104,7 +104,11 @@ func registerMiddleware(h *server.Hertz) {
 	// if err == nil {
 	// 	rs.SetSerializer(sessions.JSONSerializer{})
 	// }
-	h.Use(sessions.New("cloudwego-shop", store))
+	// sessionNames := []string{"user_id", "user_email"}
+	// h.Use(sessions.Many(sessionNames, store))
+
+
+	h.Use(sessions.New("gomall", store))
 
 	// log
 	logger := hertzobslogrus.NewLogger(hertzobslogrus.WithLogger(hertzlogrus.NewLogger().Logger()))

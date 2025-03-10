@@ -3,7 +3,7 @@ package checkoutservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	checkout "gomall_study/rpc_gen/kitex_gen/checkout"
+	checkout "gomall/rpc_gen/kitex_gen/checkout"
 )
 
 // NewServer creates a server.Server with the given handler and options.

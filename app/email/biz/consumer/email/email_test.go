@@ -3,7 +3,7 @@ package email
 import (
 	"testing"
 
-	"gomall_study/rpc_gen/kitex_gen/email"
+	"gomall/rpc_gen/kitex_gen/email"
 
 	"github.com/nats-io/nats.go"
 	"google.golang.org/protobuf/proto"

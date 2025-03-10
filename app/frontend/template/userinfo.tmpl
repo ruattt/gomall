@@ -1,0 +1,55 @@
+{{define "userinfo"}}
+{{template "header" .}}
+<form method="post" action="/auth/updateinfo">
+    <div class="input-group mb-3">
+        <span class="input-group-text">Name: </span>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Name" name="name">
+            <label for="floatingInputGroup2">{{.UserName}}</label>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Email: </span>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Email" name="email">
+            <label for="floatingInputGroup2">{{.UserEmail}}</label>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Password: </span>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Password" name="password">
+            <label for="floatingInputGroup2">Enter Your New Password</label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary ">Confirm update</button>
+</form>
+{{if .Success}}
+<figure class="text-center">
+    <blockquote class="blockquote">
+      <p>Success Upade Your infomation!</p>
+    </blockquote>
+  </figure>
+  
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  {{end}}
+{{template "footer" .}}
+{{end}}

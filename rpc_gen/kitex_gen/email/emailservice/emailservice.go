@@ -8,7 +8,7 @@ import (
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 	streaming "github.com/cloudwego/kitex/pkg/streaming"
-	email "gomall_study/rpc_gen/kitex_gen/email"
+	email "gomall/rpc_gen/kitex_gen/email"
 	proto "google.golang.org/protobuf/proto"
 )
 

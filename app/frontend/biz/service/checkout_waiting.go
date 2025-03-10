@@ -3,11 +3,11 @@ package service
 import (
 	"context"
 
-	checkout "gomall_study/app/frontend/hertz_gen/frontend/checkout"
-	"gomall_study/app/frontend/infra/rpc"
-	frontendutils "gomall_study/app/frontend/utils"
-	rpccheckout "gomall_study/rpc_gen/kitex_gen/checkout"
-	rpcpayment "gomall_study/rpc_gen/kitex_gen/payment"
+	checkout "gomall/app/frontend/hertz_gen/frontend/checkout"
+	"gomall/app/frontend/infra/rpc"
+	frontendutils "gomall/app/frontend/utils"
+	rpccheckout "gomall/rpc_gen/kitex_gen/checkout"
+	rpcpayment "gomall/rpc_gen/kitex_gen/payment"
 
 
 	"github.com/cloudwego/hertz/pkg/app"

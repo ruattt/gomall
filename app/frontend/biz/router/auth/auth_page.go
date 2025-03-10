@@ -4,7 +4,7 @@ package auth
 
 import (
 	"github.com/cloudwego/hertz/pkg/app/server"
-	auth "gomall_study/app/frontend/biz/handler/auth"
+	auth "gomall/app/frontend/biz/handler/auth"
 )
 
 /*
@@ -22,5 +22,7 @@ func Register(r *server.Hertz) {
 		_auth.POST("/login", append(_loginMw(), auth.Login)...)
 		_auth.POST("/logout", append(_logoutMw(), auth.Logout)...)
 		_auth.POST("/register", append(_registerMw(), auth.Register)...)
+		_auth.POST("/updateinfo", append(_updateinfoMw(), auth.Updateinfo)...)
+		_auth.GET("/userinfo", append(_userinfoMw(), auth.Userinfo)...)
 	}
 }

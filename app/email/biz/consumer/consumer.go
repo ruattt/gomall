@@ -1,6 +1,6 @@
 package consumer
 
-import "gomall_study/app/email/biz/consumer/email"
+import "gomall/app/email/biz/consumer/email"
 
 func Init() {
 	email.ConsumerInit()

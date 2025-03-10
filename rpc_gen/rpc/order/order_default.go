@@ -2,7 +2,7 @@ package order
 
 import (
 	"context"
-	order "gomall_study/rpc_gen/kitex_gen/order"
+	order "gomall/rpc_gen/kitex_gen/order"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/klog"
 )

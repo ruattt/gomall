@@ -2,11 +2,9 @@ package utils
 
 import (
 	"context"
-
-	"gomall_study/app/frontend/infra/rpc"
-	frontendUtils "gomall_study/app/frontend/utils"
-	"gomall_study/rpc_gen/kitex_gen/cart"
-
+	"gomall/app/frontend/infra/rpc"
+	frontendUtils "gomall/app/frontend/utils"
+	"gomall/rpc_gen/kitex_gen/cart"
 	"github.com/cloudwego/hertz/pkg/app"
 )
 

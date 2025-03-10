@@ -1,11 +1,11 @@
-export ROOT_MOD=gomall_study
-.PHONY: gen-demo-proto
-gen-demo-proto:
-	@cd demo/demo_proto && cwgo server -I ../../idl --module ${ROOT_MOD}/demo/demo_proto --service demo_proto --idl ../../idl/echo.proto
+export ROOT_MOD=gomall
+# .PHONY: gen-demo-proto
+# gen-demo-proto:
+# 	@cd demo/demo_proto && cwgo server -I ../../idl --module ${ROOT_MOD}/demo/demo_proto --service demo_proto --idl ../../idl/echo.proto
 
 .PHONY: gen-frontend
 gen-frontend:
-	@cd app/frontend && cwgo server -I ../../idl --type HTTP --service frontend --module  ${ROOT_MOD}/app/frontend --idl ../../idl/frontend/order_page.proto
+	@cd app/frontend && cwgo server -I ../../idl --type HTTP --service frontend --module  ${ROOT_MOD}/app/frontend --idl ../../idl/frontend/auth_page.proto
 
 .PHONY: gen-user
 gen-user:

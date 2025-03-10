@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 
-	"gomall_study/app/user/biz/dal/mysql"
-	"gomall_study/app/user/biz/model"
-	user "gomall_study/app/user/kitex_gen/user"
+	"gomall/app/user/biz/dal/mysql"
+	"gomall/app/user/biz/model"
+	user "gomall/rpc_gen/kitex_gen/user"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -37,7 +37,9 @@ func (s *RegisterService) Run(req *user.RegisterReq) (resp *user.RegisterResp, e
 	newUser := &model.User{
 		Email:          req.Email,
 		PasswordHashed: string(password),
+		Name:           "user",
 	}
+	
 	err = model.Create(mysql.DB, newUser)
 	if err != nil {
 		return nil, err

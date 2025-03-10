@@ -2,7 +2,7 @@ package user
 
 import (
 	"context"
-	user "gomall_study/rpc_gen/kitex_gen/user"
+	user "gomall/rpc_gen/kitex_gen/user"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/klog"
 )
@@ -20,6 +20,24 @@ func Login(ctx context.Context, req *user.LoginReq, callOptions ...callopt.Optio
 	resp, err = defaultClient.Login(ctx, req, callOptions...)
 	if err != nil {
 		klog.CtxErrorf(ctx, "Login call failed,err =%+v", err)
+		return nil, err
+	}
+	return resp, nil
+}
+
+func GetInfo(ctx context.Context, req *user.GetInfoReq, callOptions ...callopt.Option) (resp *user.GetInfoResp, err error) {
+	resp, err = defaultClient.GetInfo(ctx, req, callOptions...)
+	if err != nil {
+		klog.CtxErrorf(ctx, "GetInfo call failed,err =%+v", err)
+		return nil, err
+	}
+	return resp, nil
+}
+
+func UpdateInfo(ctx context.Context, req *user.UpdateInfoReq, callOptions ...callopt.Option) (resp *user.UpdateInfoResp, err error) {
+	resp, err = defaultClient.UpdateInfo(ctx, req, callOptions...)
+	if err != nil {
+		klog.CtxErrorf(ctx, "UpdateInfo call failed,err =%+v", err)
 		return nil, err
 	}
 	return resp, nil

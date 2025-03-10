@@ -5,12 +5,12 @@ import (
 	"net"
 	"time"
 
-	"gomall_study/app/product/biz/dal"
-	"gomall_study/app/product/conf"
-	"gomall_study/rpc_gen/kitex_gen/product/productcatalogservice"
+	"gomall/app/product/biz/dal"
+	"gomall/app/product/conf"
+	"gomall/rpc_gen/kitex_gen/product/productcatalogservice"
 
-	"gomall_study/common/mtl"
-	"gomall_study/common/serversuite"
+	"gomall/common/mtl"
+	"gomall/common/serversuite"
 
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/server"

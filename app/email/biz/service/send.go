@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	email "gomall_study/rpc_gen/kitex_gen/email"
+	email "gomall/rpc_gen/kitex_gen/email"
 )
 
 type SendService struct {

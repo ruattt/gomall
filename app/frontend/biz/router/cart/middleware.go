@@ -3,7 +3,7 @@
 package cart
 
 import (
-	"gomall_study/app/frontend/middleware"
+	"gomall/app/frontend/middleware"
 
 	"github.com/cloudwego/hertz/pkg/app"
 )

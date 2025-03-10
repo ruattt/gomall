@@ -8,7 +8,7 @@ import (
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 	streaming "github.com/cloudwego/kitex/pkg/streaming"
-	user "gomall_study/rpc_gen/kitex_gen/user"
+	user "gomall/rpc_gen/kitex_gen/user"
 	proto "google.golang.org/protobuf/proto"
 )
 
@@ -26,6 +26,20 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		loginHandler,
 		newLoginArgs,
 		newLoginResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"GetInfo": kitex.NewMethodInfo(
+		getInfoHandler,
+		newGetInfoArgs,
+		newGetInfoResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"UpdateInfo": kitex.NewMethodInfo(
+		updateInfoHandler,
+		newUpdateInfoArgs,
+		newUpdateInfoResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
@@ -401,6 +415,312 @@ func (p *LoginResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getInfoHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.GetInfoReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).GetInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetInfoArgs:
+		success, err := handler.(user.UserService).GetInfo(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetInfoResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetInfoArgs() interface{} {
+	return &GetInfoArgs{}
+}
+
+func newGetInfoResult() interface{} {
+	return &GetInfoResult{}
+}
+
+type GetInfoArgs struct {
+	Req *user.GetInfoReq
+}
+
+func (p *GetInfoArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.GetInfoReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetInfoArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetInfoArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetInfoArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetInfoArgs) Unmarshal(in []byte) error {
+	msg := new(user.GetInfoReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetInfoArgs_Req_DEFAULT *user.GetInfoReq
+
+func (p *GetInfoArgs) GetReq() *user.GetInfoReq {
+	if !p.IsSetReq() {
+		return GetInfoArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetInfoArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetInfoArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetInfoResult struct {
+	Success *user.GetInfoResp
+}
+
+var GetInfoResult_Success_DEFAULT *user.GetInfoResp
+
+func (p *GetInfoResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.GetInfoResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetInfoResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetInfoResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetInfoResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetInfoResult) Unmarshal(in []byte) error {
+	msg := new(user.GetInfoResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetInfoResult) GetSuccess() *user.GetInfoResp {
+	if !p.IsSetSuccess() {
+		return GetInfoResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetInfoResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.GetInfoResp)
+}
+
+func (p *GetInfoResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetInfoResult) GetResult() interface{} {
+	return p.Success
+}
+
+func updateInfoHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.UpdateInfoReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).UpdateInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *UpdateInfoArgs:
+		success, err := handler.(user.UserService).UpdateInfo(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*UpdateInfoResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newUpdateInfoArgs() interface{} {
+	return &UpdateInfoArgs{}
+}
+
+func newUpdateInfoResult() interface{} {
+	return &UpdateInfoResult{}
+}
+
+type UpdateInfoArgs struct {
+	Req *user.UpdateInfoReq
+}
+
+func (p *UpdateInfoArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.UpdateInfoReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *UpdateInfoArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *UpdateInfoArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *UpdateInfoArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *UpdateInfoArgs) Unmarshal(in []byte) error {
+	msg := new(user.UpdateInfoReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var UpdateInfoArgs_Req_DEFAULT *user.UpdateInfoReq
+
+func (p *UpdateInfoArgs) GetReq() *user.UpdateInfoReq {
+	if !p.IsSetReq() {
+		return UpdateInfoArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *UpdateInfoArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *UpdateInfoArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type UpdateInfoResult struct {
+	Success *user.UpdateInfoResp
+}
+
+var UpdateInfoResult_Success_DEFAULT *user.UpdateInfoResp
+
+func (p *UpdateInfoResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.UpdateInfoResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *UpdateInfoResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *UpdateInfoResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *UpdateInfoResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *UpdateInfoResult) Unmarshal(in []byte) error {
+	msg := new(user.UpdateInfoResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *UpdateInfoResult) GetSuccess() *user.UpdateInfoResp {
+	if !p.IsSetSuccess() {
+		return UpdateInfoResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *UpdateInfoResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.UpdateInfoResp)
+}
+
+func (p *UpdateInfoResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *UpdateInfoResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -426,6 +746,26 @@ func (p *kClient) Login(ctx context.Context, Req *user.LoginReq) (r *user.LoginR
 	_args.Req = Req
 	var _result LoginResult
 	if err = p.c.Call(ctx, "Login", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetInfo(ctx context.Context, Req *user.GetInfoReq) (r *user.GetInfoResp, err error) {
+	var _args GetInfoArgs
+	_args.Req = Req
+	var _result GetInfoResult
+	if err = p.c.Call(ctx, "GetInfo", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) UpdateInfo(ctx context.Context, Req *user.UpdateInfoReq) (r *user.UpdateInfoResp, err error) {
+	var _args UpdateInfoArgs
+	_args.Req = Req
+	var _result UpdateInfoResult
+	if err = p.c.Call(ctx, "UpdateInfo", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

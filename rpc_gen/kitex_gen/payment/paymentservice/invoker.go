@@ -4,7 +4,7 @@ package paymentservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	payment "gomall_study/rpc_gen/kitex_gen/payment"
+	payment "gomall/rpc_gen/kitex_gen/payment"
 )
 
 // NewInvoker creates a server.Invoker with the given handler and options.

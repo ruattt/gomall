@@ -5,6 +5,13 @@ package user;
 option go_package = "/user";
 
 
+service UserService {
+  rpc Register (RegisterReq) returns (RegisterResp) {}
+  rpc Login (LoginReq) returns (LoginResp) {}
+  rpc GetInfo (GetInfoReq) returns (GetInfoResp) {}
+  rpc UpdateInfo (UpdateInfoReq) returns (UpdateInfoResp) {}
+}
+
 message RegisterReq {
     string email = 1;
     string password = 2;
@@ -24,7 +31,24 @@ message LoginResp {
     int32 user_id = 1;
 }
 
-service UserService {
-  rpc Register (RegisterReq) returns (RegisterResp) {}
-  rpc Login (LoginReq) returns (LoginResp) {}
+message GetInfoReq {
+    uint32 user_id = 1;
+}
+
+message GetInfoResp {
+    string email = 1;
+    string name = 2;
+}
+
+message UpdateInfoReq {
+    uint32 user_id = 1;
+    string name = 2;
+    string email = 3;
+    string password = 4;
+}
+
+message UpdateInfoResp {
+    bool success = 1;
+    string name = 2;
+    string email = 3;
 }

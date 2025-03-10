@@ -1,4 +1,4 @@
-module gomall_study/rpc_gen
+module gomall/rpc_gen
 
 go 1.23.6
 

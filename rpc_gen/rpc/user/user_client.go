@@ -2,9 +2,9 @@ package user
 
 import (
 	"context"
-	user "gomall_study/rpc_gen/kitex_gen/user"
+	user "gomall/rpc_gen/kitex_gen/user"
 
-	"gomall_study/rpc_gen/kitex_gen/user/userservice"
+	"gomall/rpc_gen/kitex_gen/user/userservice"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/client/callopt"
 )
@@ -14,6 +14,8 @@ type RPCClient interface {
 	Service() string
 	Register(ctx context.Context, Req *user.RegisterReq, callOptions ...callopt.Option) (r *user.RegisterResp, err error)
 	Login(ctx context.Context, Req *user.LoginReq, callOptions ...callopt.Option) (r *user.LoginResp, err error)
+	GetInfo(ctx context.Context, Req *user.GetInfoReq, callOptions ...callopt.Option) (r *user.GetInfoResp, err error)
+	UpdateInfo(ctx context.Context, Req *user.UpdateInfoReq, callOptions ...callopt.Option) (r *user.UpdateInfoResp, err error)
 }
 
 func NewRPCClient(dstService string, opts ...client.Option) (RPCClient, error) {
@@ -48,4 +50,12 @@ func (c *clientImpl) Register(ctx context.Context, Req *user.RegisterReq, callOp
 
 func (c *clientImpl) Login(ctx context.Context, Req *user.LoginReq, callOptions ...callopt.Option) (r *user.LoginResp, err error) {
 	return c.kitexClient.Login(ctx, Req, callOptions...)
+}
+
+func (c *clientImpl) GetInfo(ctx context.Context, Req *user.GetInfoReq, callOptions ...callopt.Option) (r *user.GetInfoResp, err error) {
+	return c.kitexClient.GetInfo(ctx, Req, callOptions...)
+}
+
+func (c *clientImpl) UpdateInfo(ctx context.Context, Req *user.UpdateInfoReq, callOptions ...callopt.Option) (r *user.UpdateInfoResp, err error) {
+	return c.kitexClient.UpdateInfo(ctx, Req, callOptions...)
 }
